@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  minesweeper-api.jaspaulbola.com:
+    image: ghcr.io/jaspaul/minesweeper-api:latest
+    restart: always
+    labels:
+      - traefik.http.routers.minesweeper-api-jaspaulbola.rule=Host(`minesweeper-api.jaspaulbola.com`)
+      - traefik.http.routers.minesweeper-api-jaspaulbola.entrypoints=https
+      - traefik.http.routers.minesweeper-api-jaspaulbola.tls=true
+      - traefik.http.routers.minesweeper-api-jaspaulbola.tls.certresolver=letsencrypt
+    networks:
+      - default
+    env_file:
+      - .env
+    volumes:
+      - ./db.sqlite3:/app/db.sqlite3
+
+networks:
+  default:
+    external:
+      name: traefik

@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", default="replace-at-runtime")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get("DEBUG", default=True))
+DEBUG = bool(os.environ.get("DEBUG", default=False))
 
 CORS_ALLOW_ALL_ORIGINS = True
 
