@@ -40,6 +40,12 @@ def get_cell_image(game, cell):
     return "square-unclicked.png"
 
 
+class GameBasicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Game
+        fields = ["id", "player_name", "status", "created_at", "last_moved_at"]
+
+
 class GameDeserializer(serializers.ModelSerializer):
     board = serializers.SerializerMethodField()
     moves = serializers.SerializerMethodField()
@@ -68,6 +74,7 @@ class GameDeserializer(serializers.ModelSerializer):
             "board",
             "moves",
             "last_moved_at",
+            "created_at",
         ]
 
 
@@ -83,4 +90,5 @@ class GameSerializer(serializers.ModelSerializer):
             "board",
             "moves",
             "last_moved_at",
+            "created_at",
         ]

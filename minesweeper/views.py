@@ -1,6 +1,6 @@
 from .gameboard import Move, Point, create, is_on_gameboard, reveal, status
 from .models import Game
-from .serializers import GameSerializer, GameDeserializer
+from .serializers import GameBasicSerializer, GameDeserializer, GameSerializer
 
 from django.utils import timezone
 from rest_framework import status as rest_status
@@ -26,7 +26,7 @@ class GameApiView(APIView):
 class GameListApiView(APIView):
     def get(self, request, *args, **kwargs):
         games = Game.objects.all()
-        serializer = GameDeserializer(games, many=True)
+        serializer = GameBasicSerializer(games, many=True)
         return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
