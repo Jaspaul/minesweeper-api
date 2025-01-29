@@ -53,7 +53,8 @@ def surrounding_cells(gameboard: List[List[Cell]], point: Point) -> List[Cell]:
 
 def create(rows: int, columns: int, bomb_count: int) -> List[List[Cell]]:
     if bomb_count > rows * columns - 1:
-        raise ValueError(f"Bomb count must be < rows * columns ({ rows * columns })")
+        max_plus_one = rows * columns
+        raise ValueError(f"Bomb count must be < rows * columns ({max_plus_one})")
 
     gameboard = [
         [Cell(Point(row, column)) for column in range(columns)] for row in range(rows)

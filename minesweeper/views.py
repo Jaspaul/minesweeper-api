@@ -39,7 +39,9 @@ class GameListApiView(APIView):
 
         if data["bomb_count"] > data["rows"] * data["columns"] - 1:
             return Response(
-                {"error": "Bomb count must be < rows * columns ({ rows * columns })"},
+                {
+                    "error": f"Bomb count must be < rows * columns ({ data["rows"] * data["columns"] })"
+                },
                 status=rest_status.HTTP_400_BAD_REQUEST,
             )
 
