@@ -25,14 +25,22 @@ SECRET_KEY = os.environ.get("SECRET_KEY", default="replace-at-runtime")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DEBUG", default=True))
 
-# 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a , between each.
-# For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1,[::1]'
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1").split(",")
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
-INSTALLED_APPS = []
+INSTALLED_APPS = [
+    "corsheaders",
+    "rest_framework",
+    "minesweeper",
+]
 
-MIDDLEWARE = []
+MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+]
+
+REST_FRAMEWORK = {
+    "UNAUTHENTICATED_USER": None,  # Needed once you disable django.contrib.auth
+}
 
 ROOT_URLCONF = "api.urls"
 
@@ -62,24 +70,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
 
 
 # Internationalization
