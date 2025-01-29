@@ -12,7 +12,7 @@ import jsonpickle
 
 class GameApiView(APIView):
     def get(self, request, *args, **kwargs):
-        game = Game.objects.get(pk=kwargs["pk"])
+        game = Game.objects.filter(pk=kwargs["pk"]).first()
 
         if not game:
             return Response(
@@ -62,7 +62,7 @@ class GameListApiView(APIView):
 
 class ClickApiView(APIView):
     def post(self, request, *args, **kwargs):
-        game = Game.objects.get(pk=kwargs["pk"])
+        game = Game.objects.filter(pk=kwargs["pk"]).first()
 
         if not game:
             return Response(
@@ -99,7 +99,7 @@ class ClickApiView(APIView):
 
 class ToggleFlagApiView(APIView):
     def post(self, request, *args, **kwargs):
-        game = Game.objects.get(pk=kwargs["pk"])
+        game = Game.objects.filter(pk=kwargs["pk"]).first()
 
         if not game:
             return Response(
