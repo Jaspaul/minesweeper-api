@@ -7,12 +7,16 @@ def get_cell_image(game, cell):
     if game.status == "I":
         if cell.is_bomb() and cell.revealed:
             return "bomb-result-error.png"
+
         if cell.flagged:
             return "square-flagged.png"
+
+        if cell.revealed and cell.neighbour_count == 0:
+            return "square-clicked.png"
+
         if cell.revealed:
-            if cell.neighbour_count == 0:
-                return "square-clicked.png"
             return f"square-{cell.neighbour_count}.png"
+
         return "square-unclicked.png"
 
     if cell.is_bomb() and cell.revealed:
@@ -21,17 +25,17 @@ def get_cell_image(game, cell):
     if cell.flagged and not cell.is_bomb():
         return "bomb-result-incorrect.png"
 
-    if cell.flagged and cell.is_bomb():
+    if (cell.flagged and cell.is_bomb()) or (cell.is_bomb() and game.status == "W"):
         return "square-flagged.png"
 
     if cell.revealed and cell.neighbour_count == 0:
         return "square-clicked.png"
 
-    if cell.revealed:
-        return f"square-{cell.neighbour_count}.png"
-
     if cell.is_bomb():
         return "bomb-result-location.png"
+
+    if cell.revealed:
+        return f"square-{cell.neighbour_count}.png"
 
     return "square-unclicked.png"
 
