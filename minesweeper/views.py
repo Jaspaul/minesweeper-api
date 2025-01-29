@@ -37,6 +37,17 @@ class GameListApiView(APIView):
             "bomb_count": int(request.data.get("bomb_count")),
         }
 
+        if (
+            data["rows"] < 2
+            or data["rows"] > 80
+            or data["columns"] < 2
+            or data["columns"] > 80
+        ):
+            return Response(
+                {"error": "The number of rows and columns must be between 2 and 80"},
+                status=rest_status.HTTP_400_BAD_REQUEST,
+            )
+
         if data["bomb_count"] > data["rows"] * data["columns"] - 1:
             return Response(
                 {

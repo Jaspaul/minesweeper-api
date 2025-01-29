@@ -26,6 +26,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", default="replace-at-runtime")
 DEBUG = bool(os.environ.get("DEBUG", default=False))
 
 CORS_ALLOW_ALL_ORIGINS = True
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
