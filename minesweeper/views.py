@@ -37,6 +37,11 @@ class GameListApiView(APIView):
             "bomb_count": int(request.data.get("bomb_count")),
         }
 
+        if len(data["player_name"]) < 1 or len(data["player_name"]) > 20:
+            return Response(
+                {"error": "Player name must be between 1 and 20 characters"},
+                status=rest_status.HTTP_400_BAD_REQUEST,
+            )
         if (
             data["rows"] < 2
             or data["rows"] > 80
