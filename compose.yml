@@ -1,0 +1,14 @@
+services:
+ minesweeper:
+   build: .
+   container_name: minesweeper
+   ports:
+     - "8000:8000"
+   environment:
+     ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+     DEBUG: ${DEBUG}
+     LOGLEVEL: ${LOGLEVEL}
+     SECRET_KEY: ${SECRET_KEY}
+
+   env_file:
+     - .env
